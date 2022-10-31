@@ -1,0 +1,5 @@
+{
+  "PORT": 3001,
+  "URL": "mongodb://localhost/havi_Job_portal",
+  "JWTPRIVATEKEY": "SowMii_AmmU"
+}
