@@ -19,4 +19,7 @@ const Registration = async (req, res, next) => {
     console.log(error);
   }
 };
-module.exports = Registration;
+module.exports = {
+  Registration
+}
+  
