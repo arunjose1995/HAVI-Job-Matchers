@@ -4,26 +4,31 @@ const havi_Job_portal = new mongoose.Schema({
   Name: {
     type: String,
   },
-  Mail_id: {
+  Degree:{
     type: String,
   },
-  Mobile_no: {
+  Subject:{
+    type: String,
+  },
+  Univercity:{
+    type: String,
+  },
+  Year_of_passing:{
     type: Number,
   },
-  Address: {
+  Experience:{
     type: String,
   },
-  Univercity: {
+  Company:{
     type: String,
   },
-  User_name: {
+  CTC:{
     type: String,
   },
-  Password: {
+  Feed_of_intrest:{
     type: String,
-  },
-  User_type: {
-    type: String,
-  },
-});
-module.exports = mongoose.model('Registration', havi_Job_portal);
+  }
+
+})
+
+module.exports = mongoose.model('job_seeker', havi_Job_portal);

@@ -5,7 +5,8 @@ const middleware = require('../middleware/regis.middleware');
 
 const app = express.Router();
 
-app.post('/', middleware, controller.postdetails);
-app.post('/registration', middleware, controller.user_registration);
+app.post('/registration', middleware.Registration, controller.postdetails);
+app.post('/login', middleware.Registration, controller.user_login);
 
 module.exports = app;
+
