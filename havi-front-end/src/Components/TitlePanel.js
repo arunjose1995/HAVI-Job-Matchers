@@ -29,11 +29,11 @@ export default function TitlePanel() {
   const [anchorEl, setAnchorEl] = useState();
   const Navigate=useNavigate();
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event) => {
     setAuth(event.target.checked);
   };
 
-  const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
+  const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
     
   };
@@ -56,7 +56,7 @@ export default function TitlePanel() {
       edge="start"
       color="inherit"
       aria-label="menu"
-      sx={{ mr: 2 }}
+      sx={{ mr: 1 }}
     >
       <MenuIcon />
     </IconButton>

@@ -25,111 +25,141 @@ import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import axios from "axios";
+import { FormControl } from "@mui/material";
+import Container from "@mui/material/Container";
+
 const theme = createTheme();
 
 export default function SignIn() {
  
   const Navigate = useNavigate();
-  const [type, setType] = useState();
-const baseURL="http://localhost:3001/";
-  const handleChange = (event: SelectChangeEvent) => {
+  const [type, setType] = useState("");
+  const [user,setUser]=useState("");
+  const [pass,setPass]=useState("");
+const baseURL="http://localhost:3001/login";
+  const handleChangeType = (event) => {
     setType(event.target.value);
+  }
+  const handleUser = (event) => {
+    setUser(event.target.value);
+  }
+  const handlePass = (event) => {
+    setPass(event.target.value);
   }
   const validateUser = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    let username = data.get("username");
-    let password = data.get("password");
+    
+   const userObj={
+    UserName: user,
+    Password: pass,
+    UserType:type
+   }
+   console.log("Login="+JSON.stringify(userObj));
 
-    axios.get(baseURL).then((response) => {
-      console(response.data);
+    
+    axios.post(baseURL, userObj)
+    .then(function (response) {
+      console.log("Response:"+response.data.message);
+    })
+    .catch(function (error) {
+      console.log(error);
     });
 
-    // if(username==="vanitha" && password==="12345")
-    // {
-    //   console.log("Welcome");
-    // }
-    // else{
-    //   console.log("Invalid");
-    // }
   }
   return (
-    <div backgroundcolor="#e2f590">
-      <TitlePanel />
+    <>
+    
+      <TitlePanel/>
 
-      <Box
-        sx={{
-          mt: 0,
-          display: "flex",
-         flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        <Card
+      <Container component="main">
+        <CssBaseline />
+        <Box
+          mx={{
+            marginTop: 0,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+             <Card
           sx={{ maxWidth: 500 }}
           style={{
-            marginTop: "50px",
-            height: "500px",
+            marginTop: "20px",
+            
          flexDirection: "column",
 
             border: "10px",
             backgroundColor: "#d8e05e",
           }}
         >
-          <Avatar sx={{ ml: 30, mt: 5, bgcolor: "grey" }}>
+           <Avatar sx={{ ml: 30, mt: 5, bgcolor: "grey" }}>
             <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign in
-          </Typography>
-          <Box component="form" noValidate sx={{ mt: 1 }} onSubmit={validateUser}>
-            <TextField
-              margin="normal"
-              required
-              id="username"
-              label="Username"
-              name="username"
-              autoFocus
-              style={{ width: "350px" }}
+           </Avatar>
+           <Typography component="h1" variant="h5">
+             Sign in
+           </Typography>
 
-            />
-            <TextField
-              margin="normal"
-              required
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
+          <Box
+            component="form"
+            noValidate
+            onSubmit={validateUser}
+            sx={{ mt: 3 }}
+          >
+            <Grid container rowSpacing={2}>
+            <Grid item xs={12}>
+                <TextField
+                 
+                  name="username"
+                  label="User Name"
+                  id="username"
               style={{ width: "350px" }}
-            />
-<br></br>
+                value={user || "" }
+                onChange={handleUser}
+                 
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                 type="password"
+                                   name="password"
+                  label="Password"
+                  id="password"
+              style={{ width: "350px" }}
+                value={pass || "" }
+                onChange={handlePass}
+                 
+                />
+              </Grid>
+              <Grid item xs={12}>
+<FormControl style={{width:"350px"}}>
 <InputLabel id="demo-select-small">User Type</InputLabel>
       <Select
         labelId="demo-select-small"
         id="demo-select-small"
         value={type}
         label="User Type"
-        onChange={handleChange}
+        onChange={handleChangeType}
       >
         <MenuItem value="">
           <em>None</em>
         </MenuItem>
-        <MenuItem value={"Admin"}>Admin</MenuItem>
+        
         <MenuItem value={"Recruiter"}>Recruiter</MenuItem>
         <MenuItem value={"Job_Seeker"}>Job Seeker</MenuItem>
       </Select>
+      </FormControl>
+            </Grid>
 
+          
+            </Grid>
             <Button
               type="submit"
-              maxwidth="30px"
+              maxwidth="sx{8}"
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-             
             >
-              Sign In
+              Login
             </Button>
-<br></br><br></br><br></br>
             <Grid container>
               <Grid item xs>
                 <Link href="/Forget" variant="body2">
@@ -145,6 +175,8 @@ const baseURL="http://localhost:3001/";
           </Box>
         </Card>
       </Box>
-    </div>
+
+      </Container>  
+    </>
   );
 }

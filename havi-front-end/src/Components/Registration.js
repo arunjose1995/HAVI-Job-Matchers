@@ -11,19 +11,95 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Card from "@mui/material/Card";
+import MenuItem from '@mui/material/MenuItem';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import InputLabel from '@mui/material/InputLabel';
+import axios from "axios";
 
 import TitlePanel from "./TitlePanel";
+import { FormControl } from "@mui/material";
+import { HaviContext } from "../Context/HAVIContext";
 const theme = createTheme();
 
 export default function SignUp() {
+  const [type,setType]=useState("");
+  const [name,setName]=useState("");
+  const [mail,setMail]=useState("");
+  const [mobile,setMobile]=useState("");
+  const [address,setAddress]=useState("");
+  const [city,setCity]=useState("");
+  const [user,setUser]=useState("");
+  const [pass,setPass]=useState("");
+  const [response,setResponse]=useState("");
+  const {setRole,setRegName}=useContext(HaviContext);
+const pathNav=useNavigate();
+
+  const baseURL="http://localhost:3001/registration";
+
+  const handleChangeType = (event) => {
+    setType(event.target.value);
+    setRole(type);
+  }
+  const handleName = (event) => {
+    setName(event.target.value);
+    
+  }
+  const handleMail = (event) => {
+    setMail(event.target.value);
+  }
+  const handleMobile = (event) => {
+    setMobile(event.target.value);
+  }
+  const handleAddress = (event) => {
+    setAddress(event.target.value);
+  }
+  const handleCity = (event) => {
+    setCity(event.target.value);
+  }
+  const handleUser = (event) => {
+    setUser(event.target.value);
+    setRegName(user);
+  }
+  const handlePass = (event) => {
+    setPass(event.target.value);
+  }
+  const registerUser = (event) => {
+    event.preventDefault();
+    const userObj={
+      Name:name,
+      Mail:mail,
+      Mobile:mobile,
+      Address: address,
+      City: city,
+      UserName: user,
+      Password: pass,
+      UserType: type
+    }
+    console.log("Reg="+JSON.stringify(userObj));
   
+  axios.post(baseURL, userObj)
+  .then(function (res) {
+    console.log(res.data);
+    setResponse(res.data.message);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+useEffect(()=>{
+if(response==="Success")
+{
+pathNav("/Profile");
+}
+},[response]);
+
+  }
   return (
     <>
     
       <TitlePanel/>
 
       <Container component="main">
-        <CssBaseline />
+       
         <Box
           mx={{
             marginTop: 0,
@@ -36,7 +112,7 @@ export default function SignUp() {
           sx={{ maxWidth: 500 }}
           style={{
             marginTop: "20px",
-            height: "500px",
+            
          flexDirection: "column",
 
             border: "10px",
@@ -50,75 +126,130 @@ export default function SignUp() {
           <Box
             component="form"
             noValidate
-            // onSubmit={handleSubmit}
+            onSubmit={registerUser}
             sx={{ mt: 3 }}
           >
-            <Grid container columnSpacing={5} rowSpacing={2} columns={12}>
+            <Grid container rowSpacing={2}>
+             
               <Grid item xs={12}>
                 <TextField
-                  name="empId"
-                  InputProps={{
-                    readOnly: true,
-                  }}
-                  variant="standard"
-                  maxwidth="mx"
-                  id="empId"
                   
-                  label="Employee Id"
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  fullWidth
                   id="name"
                   label="Name"
                   name="name"
-                
+                  onChange={handleName}
+              style={{ width: "350px" }}
+                value={name || "" }
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12}>
                 <TextField
                   required
-                  fullWidth
-                  id="joindate"
-                  label="Joining Date"
-                  name="joindate"
+                  type="email"
+                  onChange={handleMail}
+                  
+                  id="mail"
+                  label="Mail Id"
+                  name="mail"
+              style={{ width: "350px" }}
+                value={mail || "" }
                   
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12}>
                 <TextField
                   required
-                  fullWidth
+                  onChange={handleMobile}
+                  
                   name="contact"
                   label="Contact Number"
                   
                   id="contact"
+              style={{ width: "350px" }}
+                value={mobile || "" }
                   
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12}>
                 <TextField
-                  required
-                  fullWidth
-                  name="experience"
-                  label="Experience"
-                  id="experience"
+                  name="address"
+                  label="Address"
+                  id="address"
+              style={{ width: "350px" }}
+                value={address || "" }
+                onChange={handleAddress}
                  
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12}>
+              <FormControl style={{width:"350px"}}>
+<InputLabel id="demo-select-small">City</InputLabel>
+      <Select
+        labelId="demo-select-small"
+        id="demo-select-small"
+        value={city}
+        label="City"
+        onChange={handleCity}
+      >
+        <MenuItem value="">
+          <em>None</em>
+        </MenuItem>
+        
+        <MenuItem value={"Mettupalayam"}>Mettupalayam</MenuItem>
+        <MenuItem value={"Coimbatore"}>Coimbatore</MenuItem>
+        <MenuItem value={"Trichy"}>Trichy</MenuItem>
+        <MenuItem value={"Tiruppur"}>Tiruppur</MenuItem>
+        <MenuItem value={"Thanjavur"}>Thanjavur</MenuItem>
+        <MenuItem value={"Karur"}>Karur</MenuItem>
+      
+
+      </Select>
+      </FormControl>
+
+              </Grid>
+              <Grid item xs={12}>
                 <TextField
-                  required
-                  fullWidth
-                  name="mail"
-                  type="email"
-                  label="Mail Id"
-                  id="mail"
+                 
+                  name="username"
+                  label="User Name"
+                  id="username"
+              style={{ width: "350px" }}
+                value={user || "" }
+                onChange={handleUser}
                  
                 />
               </Grid>
-            
+              <Grid item xs={12}>
+                <TextField
+                 type="password"
+                                   name="password"
+                  label="Password"
+                  id="password"
+              style={{ width: "350px" }}
+                value={pass || "" }
+                onChange={handlePass}
+                 
+                />
+              </Grid>
+              <Grid item xs={12}>
+<FormControl style={{width:"350px"}}>
+<InputLabel id="demo-select-small">User Type</InputLabel>
+      <Select
+        labelId="demo-select-small"
+        id="demo-select-small"
+        value={type}
+        label="User Type"
+        onChange={handleChangeType}
+      >
+        <MenuItem value="">
+          <em>None</em>
+        </MenuItem>
+        
+        <MenuItem value={"Recruiter"}>Recruiter</MenuItem>
+        <MenuItem value={"Job_Seeker"}>Job Seeker</MenuItem>
+      </Select>
+      </FormControl>
+            </Grid>
             </Grid>
             <Button
               type="submit"
