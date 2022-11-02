@@ -4,25 +4,25 @@ const havi_Job_portal = new mongoose.Schema({
   Name: {
     type: String,
   },
-  mail_id: {
+  Mail: {
     type: String,
   },
-  mobile_no: {
+  Mobile: {
     type: Number,
   },
-  address: {
+  Address: {
     type: String,
   },
-  city: {
+  City: {
     type: String,
   },
-  user_name: {
+  UserName: {
     type: String,
   },
-  password: {
+  Password: {
     type: String,
   },
-  user_type: {
+  UserType: {
     type: String,
   },
 });

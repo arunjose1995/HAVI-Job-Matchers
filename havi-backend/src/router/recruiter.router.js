@@ -6,9 +6,9 @@ const middleware = require('../middleware/postjob.middleware');
 const app = express.Router();
 
 app.post('/details', middleware.post_job, controller.postdetails);
-app.get('/api',controller.getAlldetails)
-app.get('/api/:id',controller.getdetails)
-app.put('/update/:id',controller.updatedetails)
-app.delete('/remove/:id',controller.removedetails)
+app.get('/get',controller.getAlldetails)
+app.get('/get/:id',controller.getdetails)
+app.put('/updatedetails/:id',controller.updatedetails)
+
 
 module.exports =app;

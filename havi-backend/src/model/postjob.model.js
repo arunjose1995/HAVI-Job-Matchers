@@ -4,37 +4,37 @@ const havi_Job_portal = new mongoose.Schema({
   Name: {
     type: String,
   },
-  company_name: {
+  CompanyName: {
     type: String,
   },
-  contact_person: {
+  ContactPerson: {
     type: String,
   },
-  contact_number: {
+  ContactNumber: {
     type: Number,
   },
-  mail_id:{
+  Mail:{
     type: String,
   },
-  location:{
+  JobLocation:{
     type: String,
   },
-  area_of_work:{
+  AreaOfWork:{
     type: String,
   },
-  posted_on:{
+  PostedOn:{
     type: String,
   },
-  last_date:{
+  LastDate:{
     type: String,
   },
-  no_of_vacancy:{
+  NoOfVacancy:{
     type: Number,
   },
-  job_role:{
+  JobRole:{
     type: String,
   },
-  professional_skills:{
+  ProfessionalSkills:{
     type: String,
   }
 })

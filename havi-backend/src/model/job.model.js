@@ -4,28 +4,28 @@ const havi_Job_portal = new mongoose.Schema({
   Name: {
     type: String,
   },
-  degree:{
+  Degree:{
     type: String,
   },
-  subject:{
+  Subject:{
     type: String,
   },
-  univercity:{
+  Univercity:{
     type: String,
   },
-  year_of_passing:{
+  YearOfPassing:{
     type: Number,
   },
-  experience:{
+  Experience:{
     type: String,
   },
-  company:{
+  Company:{
     type: String,
   },
   CTC:{
     type: String,
   },
-  feed_of_intrest:{
+  FeedOfIntrest:{
     type: String,
   }
 

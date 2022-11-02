@@ -4,14 +4,14 @@ const job_seeker = async (req, res, next) => {
   try {
     const data = joi.object({
         Name: joi.string().required(),
-        degree: joi.string().required(),
-        subject: joi.string().required(),
-        univercity: joi.string().required(),
-        year_of_passing: joi.number().required(),
-        experience: joi.string().required(),
-        company: joi.string().required(),
+        Degree: joi.string().required(),
+        Subject: joi.string().required(),
+        Univercity: joi.string().required(),
+        YearOfPassing: joi.number().required(),
+        Experience: joi.string().required(),
+        Company: joi.string().required(),
         CTC: joi.string().required(),
-        feed_of_intrest: joi.string().required()
+        FeedOfIntrest: joi.string().required()
     });
     await data.validateAsync(req.body);
     next();

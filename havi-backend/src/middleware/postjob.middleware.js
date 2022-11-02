@@ -4,17 +4,17 @@ const post_job = async (req, res, next) => {
     try {
       const data = joi.object({
         Name: joi.string().required(),
-        company_name: joi.string().required(),
-        contact_person: joi.string().required(),
-        contact_number: joi.number().required(),
-        mail_id: joi.string().required(),
-        location: joi.string().required(),
-        area_of_work: joi.string().required(),
-        posted_on: joi.string().required(),
-        last_date: joi.string().required(),
-        no_of_vacancy: joi.number().required(),
-        job_role: joi.string().required(),
-        professional_skills: joi.string().required()
+        CompanyName: joi.string().required(),
+        Contact_person: joi.string().required(),
+        ContactNumber: joi.number().required(),
+        Mail: joi.string().required(),
+        JobLocation: joi.string().required(),
+        AreaOfWork: joi.string().required(),
+        PostedOn: joi.string().required(),
+        LastDate: joi.string().required(),
+        NoOfVacancy: joi.number().required(),
+        JobRole: joi.string().required(),
+        ProfessionalSkills: joi.string().required()
       })
       await data.validateAsync(req.body);
     next();
