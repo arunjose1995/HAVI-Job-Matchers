@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const havi_Job_portal = new mongoose.Schema({
-  Name: {
+  UserName: {
     type: String,
   },
   CompanyName: {
@@ -13,7 +13,7 @@ const havi_Job_portal = new mongoose.Schema({
   ContactNumber: {
     type: Number,
   },
-  Mail:{
+  MailId:{
     type: String,
   },
   JobLocation:{
@@ -28,7 +28,7 @@ const havi_Job_portal = new mongoose.Schema({
   LastDate:{
     type: String,
   },
-  NoOfVacancy:{
+  Vacancy:{
     type: Number,
   },
   JobRole:{

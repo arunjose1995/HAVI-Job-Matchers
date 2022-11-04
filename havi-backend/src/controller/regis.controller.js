@@ -37,8 +37,6 @@ catch(err){
 const user_login = async (req, res) => {
   let user = await Registration.findOne({ UserName: req.body.UserName });
   if (!user) return res.status(400).send({meesage:"user name is already registration"});
-  
-  
   let user_ps = await bcrypt.compare(req.body.Password, user.Password);
   if (!user_ps) return res.status(400).send({message:"Password is incorrect"});
   
@@ -50,9 +48,21 @@ const user_login = async (req, res) => {
   res.send({ user:user ,token: token ,message:"Success"});
 };
 
+const getAlldetails = async (req,res) => {
+  const data = await Registration.find()
+  console.log(data);
+  res.send(data)
+}
 
+const getdetails = async (req, res) => {
+ const data = await Registration.findOne({ _id: req.params.id });
+ console.log(data);
+ res.send(data);
+};
 
 module.exports = {
   postdetails,
-  user_login
+  user_login,
+  getAlldetails,
+  getdetails
 };

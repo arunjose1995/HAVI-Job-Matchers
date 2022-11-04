@@ -1,7 +1,7 @@
 const post_job = require('../model/postjob.model');
 
 const postdetails = async (req, res) => {
-    const data = new post_job({Name,CompanyName,ContactPerson,ContactNumber,Mail,JobLocation,AreaOfWork,PostedOn,LastDate,NoOfVacancy,JobRole,ProfessionalSkills}=req.body);
+    const data = new post_job({UserName,CompanyName,ContactPerson,ContactNumber,MailId,JobLocation,AreaOfWork,PostedOn,LastDate,Vacancy,JobRole,ProfessionalSkills}=req.body);
       
     const result = await data.save();
     console.log(data);
@@ -25,7 +25,7 @@ const postdetails = async (req, res) => {
         const data = await post_job.updateOne({ _id: req.params.id },
           {
             $set: {
-                Name: req.body.Name,
+                UserName: req.body.UserName,
                 CompanyName: req.body.CompanyName,
                 ContactPerson: req.body.ContactPerson,
                 ContactNumber: req.body.ContactNumber,
@@ -34,7 +34,7 @@ const postdetails = async (req, res) => {
                 AreaOfWork: req.body.AreaOfWork,
                 PostedOn: req.body.PostedOn,
                 LastDate: req.body.LastDate,
-                NoOfVacancy: req.body.NoOfVacancy
+                Vacancy: req.body.NoOfVacancy
             },
           }
         );

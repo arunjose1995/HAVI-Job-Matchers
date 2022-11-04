@@ -4,7 +4,7 @@ const cors = require('cors')
 const config = require('./config/config.json');
 const router = require('./router/router');
 const logger = require('./logger');
-
+const mail = require('../havi-backend/src/controller/notification.controller')
 const app = express();
 app.use(cors({
   origin: '*'
@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(router.router1)
 app.use(router.router2)
 app.use(router.router3)
-
+app.use(router.router4)
 
 mongoose
   .connect(config.URL)

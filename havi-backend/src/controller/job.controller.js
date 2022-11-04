@@ -1,7 +1,7 @@
 const job_seeker = require('../model/job.model');
 
 const postdetails = async (req, res) => {
-  const data = new job_seeker({Name,Degree,Subject,Univercity,YearOfPassing,Experience,Company,CTC,FeedOfIntrest}=req.body);
+  const data = new job_seeker({UserName,Degree,Subject,University,YearOfPassing,Experience,Company,CTC,FieldOfIntrest}=req.body);
     
   const result = await data.save();
     console.log(result);
@@ -23,15 +23,15 @@ const getdetails = async (req, res) => {
     const data = await job_seeker.updateOne({ _id: req.params.id },
       {
         $set: {
-            Name: req.body.Name,
+            UserName: req.body.UserName,
             Degree: req.body.Degree,
             Subject: req.body.Subject,
-            Univercity: req.body.Univercity,
+            University: req.body.University,
             YearOfPassing: req.body.YearOfPassing,
             Experience: req.body.Experience,
             Company: req.body.Company,
             CTC: req.body.CTC,
-            FeedOfIntrest: req.body.FeedOfIntrest
+            FieldOfIntrest: req.body.FieldOfIntrest
           
         },
       })

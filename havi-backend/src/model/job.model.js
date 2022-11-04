@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const havi_Job_portal = new mongoose.Schema({
-  Name: {
+  UserName: {
     type: String,
   },
   Degree:{
@@ -10,7 +10,7 @@ const havi_Job_portal = new mongoose.Schema({
   Subject:{
     type: String,
   },
-  Univercity:{
+  University:{
     type: String,
   },
   YearOfPassing:{
@@ -25,7 +25,7 @@ const havi_Job_portal = new mongoose.Schema({
   CTC:{
     type: String,
   },
-  FeedOfIntrest:{
+  FieldOfInterest:{
     type: String,
   }
 

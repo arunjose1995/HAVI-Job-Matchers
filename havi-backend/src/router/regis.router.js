@@ -7,6 +7,7 @@ const app = express.Router();
 
 app.post('/registration', middleware.Registration, controller.postdetails);
 app.post('/login', middleware.Registration, controller.user_login);
+app.get('/get/:id',controller.getdetails)
+app.get('/get',controller.getAlldetails)
 
 module.exports = app;
-
