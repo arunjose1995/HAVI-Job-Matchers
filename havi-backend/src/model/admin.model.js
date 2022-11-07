@@ -9,6 +9,17 @@ const havi_Job_portal = new mongoose.Schema({
     },
     ManageAccount:{
         type: String,
+    },
+    RegistrationId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'reg.model'
+      },
+    JobSeekerId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref:'job.model'
+    },
+    profile: {
+        type:Object
     }
 })
 

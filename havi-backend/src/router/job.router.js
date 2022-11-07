@@ -2,11 +2,11 @@ const express = require('express');
 const controller = require('../controller/job.controller');
 const middleware = require('../middleware/job.middleware')
 
-const app = express.Router();
+const router = express.Router();
 
-app.post('/postSeeker', middleware.job_seeker, controller.postdetails);
-app.get('/api',controller.getAlldetails)
-app.get('/api/:id',controller.getdetails)
-app.put('/update/:id',controller.updatedetails)
+router.post('/postSeeker', middleware.job_seeker, controller.postdetails);
+router.get('/api',controller.getAlldetails)
+router.get('/api/:id',controller.getdetails)
+router.put('/update/:id',controller.updatedetails)
 
-module.exports = app;
+module.exports = router;

@@ -1,10 +1,10 @@
-const express = require('express');
-const controller = require('../controller/viewprofile.controller');
+// const express = require('express');
+// const controller = require('../controller/viewprofile.controller');
 
 
-const app = express.Router();
+// const app = express.Router();
 
-app.post('/viewprofile', controller.viewprofile)
+// app.post('/viewprofile', controller.viewprofile)
 
 
-module.exports = app;
+// module.exports = app;

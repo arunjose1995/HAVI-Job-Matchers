@@ -3,12 +3,12 @@ const controller = require('../controller/postjob.controller');
 const middleware = require('../middleware/postjob.middleware');
 
 
-const app = express.Router();
+const router = express.Router();
 
-app.post('/details', middleware.post_job, controller.postdetails);
-app.get('/get',controller.getAlldetails)
-app.get('/get/:id',controller.getdetails)
-app.put('/updatedetails/:id',controller.updatedetails)
+router.post('/details', middleware.post_job, controller.postdetails);
+router.get('/get',controller.getAlldetails)
+router.get('/get/:id',controller.getdetails)
+router.put('/updatedetails/:id',controller.updatedetails)
 
 
-module.exports =app;
+module.exports =router;

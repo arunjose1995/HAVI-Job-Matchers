@@ -10,11 +10,11 @@ app.use(cors({
   origin: '*'
 }));
 app.use(express.json());
-app.use(router.router1)
-app.use(router.router2)
-app.use(router.router3)
-app.use(router.router4)
-app.use(router.router5)
+app.use(router.registration)
+app.use(router.jobseeker)
+app.use(router.recruiter)
+app.use(router.admin)
+app.use(router.notification)
 
 mongoose
   .connect(config.URL)

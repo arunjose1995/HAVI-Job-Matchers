@@ -1,12 +1,13 @@
-const router1 = require('../src/router/regis.router')
-const router2 = require('../src/router/job.router')
-const router3 = require('../src/router/recruiter.router')
-const router4 = require('../src/router/admin.router')
-const router5 = require('../src/router/viewprofile.router')
+const registration = require('../src/router/regis.router')
+const jobseeker = require('../src/router/job.router')
+const recruiter = require('../src/router/recruiter.router')
+const admin = require('../src/router/admin.router')
+const notification = require('../src/router/notification.router')
+
 module.exports={
-    router1,
-    router2,
-    router3,
-    router4,
-    router5
+    registration,
+    jobseeker,
+    recruiter,
+    admin,
+    notification
 }
