@@ -15,7 +15,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import axios from "axios";
-
+import PostJob from "./PostJob";
 import TitlePanel from "./TitlePanel";
 import { FormControl } from "@mui/material";
 import { HaviContext } from "../Context/HAVIContext";
@@ -31,7 +31,7 @@ export default function SignUp() {
   const [user,setUser]=useState("");
   const [pass,setPass]=useState("");
   const [response,setResponse]=useState("");
-  const {setRole,setRegName}=useContext(HaviContext);
+  const {role,setRole,setRegName}=useContext(HaviContext);
 const pathNav=useNavigate();
 
   const baseURL="http://localhost:3001/registration";
@@ -63,7 +63,7 @@ const pathNav=useNavigate();
   const handlePass = (event) => {
     setPass(event.target.value);
   }
-  const registerUser = (event) => {
+  const RegisterUser = (event) => {
     event.preventDefault();
     const userObj={
       Name:name,
@@ -79,20 +79,32 @@ const pathNav=useNavigate();
   
   axios.post(baseURL, userObj)
   .then(function (res) {
-    console.log(res.data);
-    setResponse(res.data.message);
+    console.log("Back="+JSON.stringify(res.data.message));
+    setResponse(JSON.stringify(res.data.message));
   })
-  .catch(function (error) {
-    console.log(error);
+  .catch(function (res) {
+    //console.log(error);
+    setResponse(JSON.stringify(res.data.message));
+
   });
-useEffect(()=>{
-if(response==="Success")
-{
-pathNav("/Profile");
-}
-},[response]);
+
 
   }
+  useEffect(()=>{
+  if(response)
+  {
+    console.log("resp="+response);
+    console.log("role="+role);
+if(type==="Job_Seeker")
+{
+  pathNav("/Profile");
+}
+else if(type==="Recruiter")
+{
+pathNav("/PostJob")
+}
+  }
+  },[response],[role]);
   return (
     <>
     
@@ -126,7 +138,7 @@ pathNav("/Profile");
           <Box
             component="form"
             noValidate
-            onSubmit={registerUser}
+            onSubmit={RegisterUser}
             sx={{ mt: 3 }}
           >
             <Grid container rowSpacing={2}>

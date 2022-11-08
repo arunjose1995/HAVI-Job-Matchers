@@ -34,10 +34,10 @@ export default function Profile() {
   const [company,setCompany]=useState("");
   const [ctc,setCtc]=useState("");
   const [interest,setInterest]=useState("");
-  
+  let selInterest=[];
   const {regName}=useContext(HaviContext);
   
-  const baseURL="http://localhost:3001/registration";
+  const baseURL="http://localhost:3001/postSeeker";
 
   const handleDegree = (event) => {
     setDegree(event.target.value);
@@ -60,17 +60,31 @@ export default function Profile() {
   const handleCtc = (event) => {
     setCtc(event.target.value);
   }
+
+  const { IT, Teaching, Business, Design, Others } = interest;
+
   const handleInterest = (event) => {
-    setInterest(event.target.value);
-  }
+    if(event.target.checked===true){
+      selInterest=[...interest];
+      selInterest.push(event.target.name);
+    setInterest(selInterest);
+    }
+    if(event.target.checked===false){
+      selInterest=[...interest];
+      selInterest.slice(event.target.name);
+    setInterest(selInterest);
+    }
+  };
+
+ 
   const registerSeeker = (event) => {
     event.preventDefault();
     const seekerObj={
-      Username:regName,
+      UserName:regName,
       Degree:degree,
       Subject:subject,
       University: university,
-      YearOfPass:year,
+      YearOfPassing:year,
       Experience:experience,
       Company:company,
       CTC:ctc,
@@ -78,13 +92,13 @@ export default function Profile() {
     }
     console.log("SeekerReg="+JSON.stringify(seekerObj));
   
-  axios.post(baseURL, seekerObj)
-  .then(function (response) {
-    console.log(response.data);
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
+    axios.post(baseURL, seekerObj)
+    .then(function (response) {
+      console.log("Back="+JSON.stringify(response.data));
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
   }
   return (
     <>
@@ -135,6 +149,15 @@ export default function Profile() {
                 value={regName}
                 />
               </Grid>
+              <Grid item xs={12}>
+              <div style={{display:'flex',justifyContent:'flex-start'}}>
+
+              <Typography component="div" variant="p" style={{marginLeft:'80px'}}>
+            Qualification Details:
+          </Typography>    
+          </div>
+
+</Grid>
               <Grid item xs={12}>
               <FormControl style={{width:"350px"}}>
 <InputLabel id="demo-select-small">Degree</InputLabel>
@@ -232,6 +255,15 @@ export default function Profile() {
 
               </Grid>
               <Grid item xs={12}>
+              <div style={{display:'flex',justifyContent:'flex-start'}}>
+
+              <Typography component="div" variant="p" style={{marginLeft:'80px'}}>
+            Experience Details:
+          </Typography>    
+          </div>
+
+</Grid>
+              <Grid item xs={12}>
                 <TextField
                  
                   name="eXperience"
@@ -268,16 +300,44 @@ onChange={handleCtc}
 />
             </Grid>
             <Grid item xs={12}>
+              
+<InputLabel id="demo-select-small" style={{marginLeft:"-110px"}}>Field of Interest</InputLabel>
 
+            <FormControl style={{width:"350px"}}>
             <FormGroup>
-      <FormControlLabel control={<Checkbox defaultChecked />} label="Teaching" />
-      <FormControlLabel control={<Checkbox  />} label="IT" />
-      <FormControlLabel control={<Checkbox  />} label="Design" />
-
-      <FormControlLabel control={<Checkbox  />} label="Business" />
-      <FormControlLabel control={<Checkbox  />} label="Others" />
+          <FormControlLabel
+            control={
+              <Checkbox checked={Teaching} onChange={handleInterest} name="Teaching" />
+            }
+            label="Teaching"
+          />
+             <FormControlLabel
+            control={
+              <Checkbox checked={IT} onChange={handleInterest} name="IT" />
+            }
+            label="IT"
+          />
+           <FormControlLabel
+            control={
+              <Checkbox  checked={Business} onChange={handleInterest} name="Business" />
+            }
+            label="Business"
+          />
+ <FormControlLabel
+            control={
+              <Checkbox checked={Design} onChange={handleInterest} name="Design" />
+            }
+            label="Design"
+          />
+      <FormControlLabel
+            control={
+              <Checkbox checked={Others} onChange={handleInterest} name="Others" />
+            }
+            label="Others"
+          />
 
       </FormGroup>
+      </FormControl>
       </Grid>
             </Grid>
             <Button
